@@ -305,7 +305,7 @@ img { max-width: 100%; display: block; }
 }
 @media (max-width: 640px) {
   .hero-media img {
-    object-position: center top;
+    object-position: 65% center;
     transform: scale(1.0);
   }
   .hero {
@@ -338,6 +338,10 @@ img { max-width: 100%; display: block; }
   padding: 0 6vw 9vh;
 }
 .hero-content { max-width: 640px; }
+
+.hero-anim {
+  opacity: 0;
+}
 
 .hero-kicker {
   font-size: 0.72rem;
@@ -1214,4 +1218,20 @@ footer .small { font-size: 0.7rem; color: #5f5236; margin-top: 20px; }
   top: 0;
   height: 100%;
   background: radial-gradient(ellipse at 50% 8%, rgba(126,21,27,.07), transparent 64%);
+}
+
+/* ============ KEYFRAME ANIMATIONS ============ */
+@keyframes kenburns {
+  0% { transform: scale(1.12) translate(0, 0); }
+  100% { transform: scale(1.22) translate(-1.2%, -1.4%); }
+}
+
+@keyframes kenburns2 {
+  0% { transform: scale(1.08) translateY(0); }
+  100% { transform: scale(1.16) translateY(-1.6%); }
+}
+
+@keyframes scrollpulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.7); transform-origin: top; }
+  50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
 }

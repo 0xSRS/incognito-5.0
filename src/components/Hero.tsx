@@ -46,15 +46,15 @@ export default function Hero() {
           fill
           priority
           sizes="100vw"
-          style={{ objectFit: "cover", objectPosition: "center center" }}
+          style={{ objectFit: "cover" }}
         />
       </div>
       <div className="hero-inner">
         <div className="hero-content">
-          <p className="hero-kicker editorial" id="hk1" style={{ opacity: 0 }}>
+          <p className="hero-kicker editorial hero-anim" id="hk1">
             SCSDF Presents
           </p>
-          <p className="hero-script script" id="hk2" style={{ opacity: 0 }}>
+          <p className="hero-script script hero-anim" id="hk2">
             We&rsquo;re gonna make you an offer you can&rsquo;t refuse&hellip;
           </p>
           <h1
@@ -66,20 +66,20 @@ export default function Hero() {
               <span>Incognito&nbsp;5.0</span>
             </span>
           </h1>
-          <p className="hero-tagline editorial" id="hk-freshers" style={{ opacity: 0 }}>
+          <p className="hero-tagline editorial hero-anim" id="hk-freshers">
             Freshers&rsquo; Night
           </p>
-          <p className="hero-sub editorial" id="hk4" style={{ opacity: 0 }}>
+          <p className="hero-sub editorial hero-anim" id="hk4">
             An invitation to the family — Freshers&rsquo; Night, held the old
             way.
           </p>
-          <div className="hero-meta editorial" id="hk5" style={{ opacity: 0 }}>
+          <div className="hero-meta editorial hero-anim" id="hk5">
             <span>5 Oct 2026</span>
             <span>4:30 PM Onwards</span>
             <span>Upper Auditorium</span>
             <span>SCSDF Only</span>
           </div>
-          <div className="hero-actions" id="hk6" style={{ opacity: 0 }}>
+          <div className="hero-actions hero-anim" id="hk6">
             <a
               href="https://docs.google.com/forms/d/e/1FAIpQLSfnduyC3DDuHO79LgrrrtARtPqFF0AT0zTNfVg3K6jXrYJ4DQ/viewform?usp=header"
               className="btn-ghost"
