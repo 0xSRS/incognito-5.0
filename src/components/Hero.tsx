@@ -1,0 +1,104 @@
+"use client";
+
+import { useEffect } from "react";
+import Image from "next/image";
+
+export default function Hero() {
+  useEffect(() => {
+    if (typeof window !== "undefined" && (window as any).gsap) {
+      const gsap = (window as any).gsap;
+      const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+
+      tl.to("#siteNav", { opacity: 1, y: 0, duration: 0.9 }, 0.1)
+        .to(".hero-media img", {
+          filter: "saturate(0.82) contrast(1.08) brightness(0.78)",
+          duration: 1.6,
+        }, 0)
+        .to("#hk1", { opacity: 1, duration: 0.8 }, 0.5)
+        .to("#hk2", { opacity: 1, duration: 0.9 }, 0.9)
+        .to(".hero-title .veil > span", {
+          y: "0%",
+          duration: 1.1,
+          ease: "power3.out",
+        }, 1.2)
+        .to(".hero-title", { opacity: 1, duration: 0.1 }, 1.2)
+        .to("#hk-freshers", { opacity: 1, duration: 0.8 }, 1.6)
+        .to("#hk4", { opacity: 1, duration: 0.8 }, 1.9)
+        .to("#hk5", { opacity: 1, duration: 0.8 }, 2.15)
+        .to("#hk6", { opacity: 1, duration: 0.9 }, 2.4);
+    } else {
+      ["siteNav", "hk1", "hk2", "hk3", "hk-freshers", "hk4", "hk5", "hk6"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.style.opacity = "1";
+      });
+      document.querySelectorAll(".hero-title .veil > span").forEach((s) => {
+        (s as HTMLElement).style.transform = "translateY(0)";
+      });
+    }
+  }, []);
+
+  return (
+    <div className="hero" id="hero">
+      <div className="hero-media">
+        <Image
+          src="/images/frame-1-no-text.webp"
+          alt="Incognito 5.0"
+          fill
+          priority
+          sizes="100vw"
+          style={{ objectFit: "cover", objectPosition: "center center" }}
+        />
+      </div>
+      <div className="hero-inner">
+        <div className="hero-content">
+          <p className="hero-kicker editorial" id="hk1" style={{ opacity: 0 }}>
+            SCSDF Presents
+          </p>
+          <p className="hero-script script" id="hk2" style={{ opacity: 0 }}>
+            We&rsquo;re gonna make you an offer you can&rsquo;t refuse&hellip;
+          </p>
+          <h1
+            className="hero-title display"
+            id="hk3"
+            aria-label="Incognito 5.0"
+          >
+            <span className="veil">
+              <span>Incognito&nbsp;5.0</span>
+            </span>
+          </h1>
+          <p className="hero-tagline editorial" id="hk-freshers" style={{ opacity: 0 }}>
+            Freshers&rsquo; Night
+          </p>
+          <p className="hero-sub editorial" id="hk4" style={{ opacity: 0 }}>
+            An invitation to the family — Freshers&rsquo; Night, held the old
+            way.
+          </p>
+          <div className="hero-meta editorial" id="hk5" style={{ opacity: 0 }}>
+            <span>5 Oct 2026</span>
+            <span>4:30 PM Onwards</span>
+            <span>Upper Auditorium</span>
+            <span>SCSDF Only</span>
+          </div>
+          <div className="hero-actions" id="hk6" style={{ opacity: 0 }}>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfnduyC3DDuHO79LgrrrtARtPqFF0AT0zTNfVg3K6jXrYJ4DQ/viewform?usp=header"
+              className="btn-ghost"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Freshers Registration
+            </a>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSeBWv1ZYroQZSlOHymGw6PQddTsvZj1PrYLv6lN6pmBtXjpfQ/viewform?usp=publish-editor"
+              className="btn-ghost secondary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Mr. and Ms. Freshers
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
