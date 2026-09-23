@@ -69,7 +69,7 @@ export default function RegistrationDossiers() {
             </a>
           </article>
 
-          <article className="dossier-card reveal">
+          <article className="dossier-card center-card reveal">
             <div className="dossier-kicker">Dossier V · The Stage</div>
             <h3>Talent Hunt</h3>
             <p>Step into the spotlight and show the family what you&rsquo;re made of. Singer, dancer, performer — every talent has its moment.</p>

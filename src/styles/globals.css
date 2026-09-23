@@ -1005,9 +1005,22 @@ section { position: relative; padding: min(18vh, 160px) 0; }
   color: var(--parchment);
   border-color: var(--blood-bright);
 }
+.dossier-card:last-child:nth-child(odd),
+.dossier-card.center-card {
+  grid-column: 1 / -1;
+  max-width: calc((100% - 18px) / 2);
+  margin-inline: auto;
+  width: 100%;
+}
 @media (max-width: 760px) {
   .dossier-grid { grid-template-columns: 1fr; }
   .dossier-card { min-height: 0; padding: 30px 27px 28px; }
+  .dossier-card:last-child:nth-child(odd),
+  .dossier-card.center-card {
+    grid-column: auto;
+    max-width: 100%;
+    margin-inline: 0;
+  }
 }
 
 /* ============ SECTION 06 — STATEMENT BREAK ============ */
