@@ -18,7 +18,7 @@ export default function Footer() {
         <div className="footer-item">
           <span className="footer-label editorial">Instagram</span>
           <a
-            href="https://www.instagram.com/p/DdhAYgvQ1U6/?stkn=MWdpNjZnam91dnFteg=="
+            href="https://www.instagram.com/incognito_scsdf_5.0/"
             target="_blank"
             rel="noopener noreferrer"
             className="footer-link"
