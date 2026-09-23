@@ -9,7 +9,7 @@ export default function RegistrationDossiers() {
             <span className="editorial">The Don&rsquo;s Ledger</span>
           </div>
           <h2>Choose your place at the table.</h2>
-          <p>Every name enters through the proper door. Select the invitation that belongs to you.</p>
+          <p>Every name enters through the proper door. Select the invitation or opportunity that belongs to you.</p>
         </div>
 
         <div className="dossier-grid">
@@ -66,6 +66,20 @@ export default function RegistrationDossiers() {
               rel="noopener noreferrer"
             >
               Join the Hunt →
+            </a>
+          </article>
+
+          <article className="dossier-card reveal">
+            <div className="dossier-kicker">Dossier V · The Stage</div>
+            <h3>Talent Hunt</h3>
+            <p>Step into the spotlight and show the family what you&rsquo;re made of. Singer, dancer, performer — every talent has its moment.</p>
+            <a
+              className="dossier-btn"
+              href="https://forms.gle/B227QKfYJWuiVQns6"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Show Your Talent →
             </a>
           </article>
         </div>

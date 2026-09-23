@@ -5,6 +5,13 @@ import "@/styles/globals.css";
 export const metadata: Metadata = {
   title: "Incognito 5.0 — An Invitation to the Family",
   description: "Incognito 5.0 — a cinematic freshers invitation.",
+  icons: {
+    icon: [
+      { url: "/favicon.png", type: "image/png" },
+    ],
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
