@@ -104,6 +104,11 @@ incognito-5.0/
 
 ## 📝 Living Changelog & Context History
 
+### [2026-09-24] — Mobile Frame Removal & Dark Overscroll
+- **Mobile Viewport Optimization**:
+  - Hid `.ornate-frame` on mobile devices (`<= 768px`) via CSS `display: none !important` and updated `OrnateFrame.tsx` to omit scroll/resize handlers on mobile screens.
+  - Added `background-color: #070504`, `color-scheme: dark`, and `<meta name="color-scheme" content="dark" />` so root canvas overscroll/rubber-banding is always noir dark.
+
 ### [2026-09-24] — Cuneo Family & Footer Instagram Integration
 - **Added The Cuneo Family**:
   - Integrated *The Cuneo Family* (Logistics and Finance Team, Monogram `Cu`) into `TheFamilies.tsx`.

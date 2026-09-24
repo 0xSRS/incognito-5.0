@@ -8,8 +8,12 @@ export default function OrnateFrame() {
   useEffect(() => {
     const updateDimensions = () => {
       if (frameRef.current) {
-        const isMobile = window.innerWidth <= 768;
-        const margin = isMobile ? 5 : 12;
+        if (window.innerWidth <= 768) {
+          frameRef.current.style.display = "none";
+          return;
+        }
+        frameRef.current.style.display = "block";
+        const margin = 12;
         frameRef.current.style.height = `${window.innerHeight - margin * 2}px`;
         frameRef.current.style.width = `${window.innerWidth - margin * 2}px`;
         frameRef.current.style.top = `${margin}px`;
@@ -19,11 +23,9 @@ export default function OrnateFrame() {
 
     updateDimensions();
     window.addEventListener("resize", updateDimensions, { passive: true });
-    window.addEventListener("scroll", updateDimensions, { passive: true });
 
     return () => {
       window.removeEventListener("resize", updateDimensions);
-      window.removeEventListener("scroll", updateDimensions);
     };
   }, []);
 

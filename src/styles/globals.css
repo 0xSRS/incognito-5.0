@@ -45,10 +45,17 @@
 
 /* ============ BASE ============ */
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  background-color: #070504;
+  color-scheme: dark;
+}
 ::selection { background: var(--blood); color: var(--parchment); }
 
-html, body { min-height: 100%; }
+html, body {
+  min-height: 100%;
+  background-color: #070504;
+}
 
 body {
   margin: 0;
@@ -209,18 +216,8 @@ img { max-width: 100%; display: block; }
 
 @media (max-width: 768px) {
   .ornate-frame {
-    top: 5px;
-    left: 5px;
-    right: 5px;
-    bottom: 5px;
-    width: calc(100vw - 10px);
-    width: calc(100dvw - 10px);
-    height: calc(100vh - 10px);
-    height: calc(100dvh - 10px);
-    border-width: 1px;
+    display: none !important;
   }
-  .ornate-frame::before { inset: 3px; }
-  .ornate-corner { display: none; }
 }
 
 /* ============ NAV ============ */
