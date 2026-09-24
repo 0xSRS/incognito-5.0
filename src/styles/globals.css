@@ -976,12 +976,6 @@ section { position: relative; padding: min(18vh, 160px) 0; }
   border: 1px solid var(--line);
   box-shadow: 0 12px 36px rgba(0,0,0,.22);
 }
-.crew-card:nth-child(4) {
-  grid-column: 2 / span 2;
-}
-.crew-card:nth-child(5) {
-  grid-column: 4 / span 2;
-}
 .crew-card::after {
   content: "";
   position: absolute;
@@ -1024,24 +1018,13 @@ section { position: relative; padding: min(18vh, 160px) 0; }
   .crew-card {
     grid-column: auto;
   }
-  .crew-card:nth-child(4) {
-    grid-column: auto;
-  }
-  .crew-card:nth-child(5) {
-    grid-column: 1 / -1;
-    max-width: calc((100% - 16px) / 2);
-    margin-inline: auto;
-    width: 100%;
-  }
 }
 @media (max-width: 640px) {
   .crew-grid {
     grid-template-columns: 1fr;
     gap: 14px;
   }
-  .crew-card,
-  .crew-card:nth-child(4),
-  .crew-card:nth-child(5) {
+  .crew-card {
     grid-column: auto;
     max-width: 100%;
     margin-inline: 0;

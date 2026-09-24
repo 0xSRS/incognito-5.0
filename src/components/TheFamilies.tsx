@@ -8,9 +8,9 @@ export default function TheFamilies() {
           <span className="editorial">The Families</span>
         </div>
         <div className="section-head reveal">
-          <h2>Five families. One Don&rsquo;s vision.</h2>
+          <h2>Six families. One Don&rsquo;s vision.</h2>
           <p>
-            Corleone stands above the operation, while four specialist families carry the night from first registration to final clue.
+            Corleone stands above the operation, while specialist families carry the night from first registration to final clue.
           </p>
         </div>
 
@@ -56,6 +56,14 @@ export default function TheFamilies() {
             <div className="role">Treasure Hunt Team</div>
             <p>
               They deal in things other people can&rsquo;t find. Clues, riddles, and hidden trails across campus — Stracci runs the hunt start to finish.
+            </p>
+          </div>
+          <div className="crew-card">
+            <div className="monogram">Cu</div>
+            <h4>The Cuneo Family</h4>
+            <div className="role">Logistics and Finance Team</div>
+            <p>
+              They manage the vault and command the logistics behind closed doors. From budgets and supplies to venue coordination, Cuneo ensures every moving part arrives on time and every ledger balances.
             </p>
           </div>
           <div className="crew-card">
