@@ -86,7 +86,7 @@ export default function Hero() {
           </p>
           <div className="hero-meta editorial hero-anim" id="hk5">
             <span>5 Oct 2026</span>
-            <span>4:30 PM Onwards</span>
+            <span>4:00 PM Onwards</span>
             <span>Upper Auditorium</span>
             <span>SCSDF Only</span>
           </div>

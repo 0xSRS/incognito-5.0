@@ -3,7 +3,7 @@ export default function TheFamilies() {
     <section className="families section-transparent" id="families">
       <div className="wrap">
         <div className="file-mark reveal">
-          <span className="num editorial">File No. IV</span>
+          <span className="num editorial">File No. III</span>
           <span className="rule" />
           <span className="editorial">The Families</span>
         </div>

@@ -26,7 +26,7 @@ export default function TheNight() {
               </div>
               <div className="item">
                 <div className="label editorial">Time</div>
-                <div className="value">4:30 PM</div>
+                <div className="value">4:00 PM</div>
               </div>
               <div className="item">
                 <div className="label editorial">Venue</div>
@@ -34,7 +34,7 @@ export default function TheNight() {
               </div>
               <div className="item">
                 <div className="label editorial">Dress</div>
-                <div className="value">A Touch of Noir - The feel of Mafia</div>
+                <div className="value">A Touch of Noir The feel of Mafia</div>
               </div>
               <div className="item">
                 <div className="label editorial">Entry</div>
