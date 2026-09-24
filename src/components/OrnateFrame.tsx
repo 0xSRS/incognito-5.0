@@ -1,34 +1,6 @@
-"use client";
-
-import { useEffect, useRef } from "react";
-
 export default function OrnateFrame() {
-  const frameRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const updateDimensions = () => {
-      if (frameRef.current) {
-        const isMobile = window.innerWidth <= 768;
-        const margin = isMobile ? 5 : 12;
-        frameRef.current.style.height = `${window.innerHeight - margin * 2}px`;
-        frameRef.current.style.width = `${window.innerWidth - margin * 2}px`;
-        frameRef.current.style.top = `${margin}px`;
-        frameRef.current.style.left = `${margin}px`;
-      }
-    };
-
-    updateDimensions();
-    window.addEventListener("resize", updateDimensions, { passive: true });
-    window.addEventListener("scroll", updateDimensions, { passive: true });
-
-    return () => {
-      window.removeEventListener("resize", updateDimensions);
-      window.removeEventListener("scroll", updateDimensions);
-    };
-  }, []);
-
   return (
-    <div ref={frameRef} className="ornate-frame" aria-hidden="true">
+    <div className="ornate-frame" aria-hidden="true">
       <span className="ornate-corner corner-tl">
         <span className="filigree" />
       </span>
