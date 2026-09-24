@@ -132,7 +132,14 @@ img { max-width: 100%; display: block; }
 /* ============ ORNATE FRAME ============ */
 .ornate-frame {
   position: fixed;
-  inset: 12px;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  width: calc(100vw - 24px);
+  width: calc(100dvw - 24px);
+  height: calc(100vh - 24px);
+  height: calc(100dvh - 24px);
   z-index: 90;
   pointer-events: none;
   border: 1px solid rgba(203,164,78,.62) !important;
@@ -201,7 +208,17 @@ img { max-width: 100%; display: block; }
 .corner-br { bottom: 18px; right: 18px; transform: scale(-1); }
 
 @media (max-width: 768px) {
-  .ornate-frame { inset: 5px; border-width: 1px; }
+  .ornate-frame {
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    width: calc(100vw - 10px);
+    width: calc(100dvw - 10px);
+    height: calc(100vh - 10px);
+    height: calc(100dvh - 10px);
+    border-width: 1px;
+  }
   .ornate-frame::before { inset: 3px; }
   .ornate-corner { display: none; }
 }
