@@ -707,6 +707,12 @@ section { position: relative; padding: min(18vh, 160px) 0; }
   font-size: 2.1rem;
   color: var(--gold);
 }
+.invitation .grid .statement.reveal-mask.in .inner {
+  transition-delay: 0.08s;
+}
+.invitation .grid .body-col.reveal.in {
+  transition-delay: 0.22s;
+}
 @media (max-width: 860px) {
   .invitation .grid { grid-template-columns: 1fr; gap: 40px; }
 }
