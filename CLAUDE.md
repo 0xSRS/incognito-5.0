@@ -104,12 +104,6 @@ incognito-5.0/
 
 ## 📝 Living Changelog & Context History
 
-### [2026-09-24] — Mobile Frame Lag & White Layer Fix
-- **Mobile Viewport Stability**:
-  - Replaced JavaScript scroll-listener dimension updates in `OrnateFrame.tsx` with pure CSS `position: fixed; inset: 12px` (and `inset: 5px` on mobile), preventing frame jumping/shifting when the mobile address bar expands/collapses.
-  - Eliminated `background-attachment: fixed` tearing on mobile by placing the dark noir gradients on a hardware-accelerated fixed pseudo-element (`body::before`).
-  - Added `color-scheme: dark` and `background-color: #070504` to `html` and `body` to prevent white background canvas flashes during overscroll/rubber-banding.
-
 ### [2026-09-24] — Cuneo Family & Footer Instagram Integration
 - **Added The Cuneo Family**:
   - Integrated *The Cuneo Family* (Logistics and Finance Team, Monogram `Cu`) into `TheFamilies.tsx`.
