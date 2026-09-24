@@ -18,7 +18,7 @@ export default function Navigation() {
   return (
     <nav className={`site-nav ${pinned ? "pinned" : ""}`} id="siteNav">
       <div className="brand nav-mark-word">Incognito 5.0</div>
-      <div style={{ display: "flex", alignItems: "center", gap: "26px" }}>
+      <div className="nav-links" style={{ display: "flex", alignItems: "center", gap: "26px" }}>
         <Link href="#the-night" className="nav-cta">
           The Night
         </Link>

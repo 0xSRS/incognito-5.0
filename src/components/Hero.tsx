@@ -3,10 +3,21 @@
 import { useEffect } from "react";
 import Image from "next/image";
 
+interface GsapTimeline {
+  to: (target: string, vars: Record<string, unknown>, position?: number | string) => GsapTimeline;
+}
+
+interface WindowWithGsap {
+  gsap?: {
+    timeline: (config?: { defaults?: { ease?: string } }) => GsapTimeline;
+  };
+}
+
 export default function Hero() {
   useEffect(() => {
-    if (typeof window !== "undefined" && (window as any).gsap) {
-      const gsap = (window as any).gsap;
+    const win = typeof window !== "undefined" ? (window as unknown as WindowWithGsap) : null;
+    if (win?.gsap) {
+      const gsap = win.gsap;
       const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
 
       tl.to("#siteNav", { opacity: 1, y: 0, duration: 0.9 }, 0.1)

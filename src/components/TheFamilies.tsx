@@ -8,9 +8,9 @@ export default function TheFamilies() {
           <span className="editorial">The Families</span>
         </div>
         <div className="section-head reveal">
-          <h2>Six families. One Don&rsquo;s vision.</h2>
+          <h2>Five families. One Don&rsquo;s vision.</h2>
           <p>
-            Corleone stands above the operation, while five specialist families carry the night from first registration to final clue.
+            Corleone stands above the operation, while four specialist families carry the night from first registration to final clue.
           </p>
         </div>
 
@@ -37,25 +37,17 @@ export default function TheFamilies() {
           <div className="crew-card">
             <div className="monogram">Ta</div>
             <h4>The Tattaglia Family</h4>
-            <div className="role">Creative Team</div>
+            <div className="role">Creative and Marketing Team</div>
             <p>
-              Flash, flair, and an eye for spectacle — they dress the room, build the décor, and make sure the night is one nobody forgets the look of.
+              Flash, flair, and an eye for spectacle — they write the buzz, lead promotions, and make sure the night is one nobody forgets the look of.
             </p>
           </div>
           <div className="crew-card">
             <div className="monogram">Ba</div>
             <h4>The Barzini Family</h4>
-            <div className="role">Marketing Team</div>
+            <div className="role">Decor and Stage Management Team</div>
             <p>
-              They know every name worth knowing, and make sure yours does too. Posters, promos, and word on the street — Barzini writes the buzz.
-            </p>
-          </div>
-          <div className="crew-card">
-            <div className="monogram">Cu</div>
-            <h4>The Cuneo Family</h4>
-            <div className="role">Logistics &amp; Management</div>
-            <p>
-              Old-school, dependable, no drama. Venue, schedule, supplies, crowd control — if it needs to run on time, it runs through Cuneo.
+              They dress the room, build the décor, and command the stage — from lighting to atmosphere, they ensure every moment runs with elegance.
             </p>
           </div>
           <div className="crew-card">
