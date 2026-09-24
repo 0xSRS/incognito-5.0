@@ -310,21 +310,7 @@ img { max-width: 100%; display: block; }
   filter: saturate(0.82) contrast(1.08) brightness(0.78);
   animation: kenburns 26s ease-out infinite alternate;
 }
-@media (max-width: 640px) {
-  .hero-media img {
-    object-position: 65% center;
-    transform: scale(1.0);
-  }
-  .hero {
-    min-height: auto;
-    height: 100vh;
-    align-items: flex-start;
-  }
-  .hero-media::before {
-    background:
-      linear-gradient(0deg, rgba(6,4,3,0.95) 0%, rgba(6,4,3,0.6) 40%, rgba(6,4,3,0.85) 100%);
-  }
-}
+
 .hero-media::before {
   content: "";
   position: absolute; inset: 0;
