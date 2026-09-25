@@ -55,7 +55,7 @@ export default function RegistrationDossiers() {
             </a>
           </article>
 
-          <article className="dossier-card reveal">
+          {/* <article className="dossier-card reveal">
             <div className="dossier-kicker">Dossier IV · The Hunt</div>
             <h3>The Treasure Hunt</h3>
             <p>Clues, riddles and hidden trails. Join the operation and see whether your crew can find what the family has concealed.</p>
@@ -67,7 +67,7 @@ export default function RegistrationDossiers() {
             >
               Join the Hunt →
             </a>
-          </article>
+          </article> */}
 
           <article className="dossier-card center-card reveal">
             <div className="dossier-kicker">Dossier V · The Stage</div>
