@@ -6,7 +6,7 @@ import OrnateFrame from "@/components/OrnateFrame";
 import { soundEffects } from "@/lib/audioEffects";
 
 
-const BACKEND_URL = process.env.BACKEND_URL || "http://localhost:8000";
+
 
 interface TicketData {
   status: "success" | "already_claimed" | "error";
@@ -34,7 +34,7 @@ export default function ValidateFlagPage() {
 
   // Check IP rate limit on page mount so refresh cannot bypass it
   useEffect(() => {
-    fetch(`${BACKEND_URL}/api/flag-rate-limit`)
+    fetch("/api/flag-rate-limit")
       .then((res) => res.json())
       .then((data) => {
         if (data.limited && data.retry_after) {
@@ -79,7 +79,7 @@ export default function ValidateFlagPage() {
     setResult(null);
 
     try {
-      const res = await fetch(`${BACKEND_URL}/api/validate-flag`, {
+      const res = await fetch("/api/validate-flag", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -153,9 +153,7 @@ export default function ValidateFlagPage() {
           Incognito 5.0
         </Link>
         <div className="nav-links" style={{ display: "flex", alignItems: "center", gap: "26px" }}>
-          <Link href="/#the-night" className="nav-cta">
-            The Night
-          </Link>
+          
           <Link href="/#families" className="nav-cta">
             The Families
           </Link>
