@@ -104,6 +104,24 @@ incognito-5.0/
 
 ## 📝 Living Changelog & Context History
 
+### [2026-10-02] — Dual Flag Pathways: The Intelligent Way vs. The Hard Way
+- **Reordered & Immersive Pathways (`src/app/magic/[token]/page.tsx`)**:
+  - **Track 01 — Encoded Payload (The Intelligent Way)**: Presented first as the cognitive deduction track (~5 min estimated time) where operatives analyze pattern layers and decrypt the ciphertext using intellect.
+  - **Track 02 — Hash Digest (The Hard Way)**: Presented second as the brute-force GPU exhaustion challenge (~5–8 hrs estimated time) targeting the SHA-256 digest. Includes one-click copyable Hashcat command syntax (`hashcat -m 1400 -a 3 <HASH> ?a?a?a?a?a?a?a?a`).
+- **Clean Free-Flow Layout & Audio Synchronization**:
+  - Maintained minimalist noir styling with atmospheric borders, Goldoni serif quotes, and audio cue stamps on action triggers.
+
+### [2026-10-02] — Magic Link Dossier Page & Isolated Route Handler
+- **Isolated Route Handler (`backend/scripts/magic_handler.py`)**:
+  - Implemented standalone microservice supporting `GET /magic/{token}` and `GET /api/magic/{token}`.
+  - Queries participant dossier, cipher algorithm (`base64`, `base32`, `rot13`), and ciphertext (`encoded_str`) directly from PostgreSQL.
+  - Features dual execution modes: FastAPI + Uvicorn or Python standard library `http.server` (zero-dependency fallback).
+  - Built-in per-IP sliding window rate limiting and CORS headers.
+- **Next.js Magic Route (`src/app/magic/[token]/page.tsx` & `src/app/api/magic/[token]/route.ts`)**:
+  - Created interactive Godfather noir dossier UI at `flag.incognito05.tech/magic/<token>`.
+  - Built-in live decoder scratchpad supporting Base64, Base32, ROT13, and Hex with audio cues.
+  - Resilient API proxy route querying the VM FastAPI backend with automatic PostgreSQL connection pool fallback.
+
 ### [2026-10-02] — PostgreSQL Connection Pool & Build Stabilization
 - **Database Pooling**:
   - Implemented `src/lib/db.ts` to provide a singleton PostgreSQL connection pool (`pg`) for dynamic slug dossiers and flag lookups.
