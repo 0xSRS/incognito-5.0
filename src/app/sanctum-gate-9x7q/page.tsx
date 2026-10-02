@@ -25,7 +25,16 @@ interface ScanHistoryItem {
 
 export default function SecretGatekeeperScannerPage() {
   // Authentication State
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        return sessionStorage.getItem("incognito_sanctum_session") === "authorized_consigliere";
+      } catch {
+        return false;
+      }
+    }
+    return false;
+  });
   const [password, setPassword] = useState("");
   const [authError, setAuthError] = useState("");
   const [authLoading, setAuthLoading] = useState(false);
@@ -50,14 +59,8 @@ export default function SecretGatekeeperScannerPage() {
   const frameIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const lastScannedTokenRef = useRef<string | null>(null);
   const lastScanTimeRef = useRef<number>(0);
-
-  // Check saved session
-  useEffect(() => {
-    const savedAuth = sessionStorage.getItem("incognito_sanctum_session");
-    if (savedAuth === "authorized_consigliere") {
-      setIsAuthenticated(true);
-    }
-  }, []);
+  const handleScanFeedbackRef = useRef<(result: ScanResult) => void>(() => {});
+  const connectWebSocketRef = useRef<() => void>(() => {});
 
   // Fetch telemetry
   const fetchStats = useCallback(async () => {
@@ -73,12 +76,65 @@ export default function SecretGatekeeperScannerPage() {
   }, []);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      fetchStats();
-      const interval = setInterval(fetchStats, 12000);
-      return () => clearInterval(interval);
-    }
-  }, [isAuthenticated, fetchStats]);
+    if (!isAuthenticated) return;
+    const loadStats = async () => {
+      try {
+        const res = await fetch("/api/admin/stats");
+        if (res.ok) {
+          const data = await res.json();
+          setStats(data);
+        }
+      } catch {
+        // ignore
+      }
+    };
+    void loadStats();
+    const interval = setInterval(loadStats, 12000);
+    return () => clearInterval(interval);
+  }, [isAuthenticated]);
+
+  // Handle Scan Verification Result
+  const handleScanFeedback = useCallback(
+    (result: ScanResult) => {
+      if (scanResult) return;
+
+      if (result.status === "searching") {
+        setScanStatusText("SCANNING FOR QR CIPHER...");
+        return;
+      }
+
+      if (result.status === "loading") {
+        setScanStatusText("AUTHENTICATING CITATION...");
+        return;
+      }
+
+      // Concrete result
+      setScanResult(result);
+
+      const historyItem: ScanHistoryItem = {
+        id: Math.random().toString(36).substring(7),
+        name: result.name || "Unknown Guest",
+        status: result.status === "success" ? "success" : "error",
+        message:
+          result.message || (result.status === "success" ? "Entry allowed" : "Scan rejected"),
+        timestamp: new Date().toLocaleTimeString(),
+      };
+
+      setHistory((prev) => [historyItem, ...prev.slice(0, 19)]);
+      void fetchStats();
+
+      if (result.status === "success") {
+        soundEffects.playSuccess();
+      } else {
+        soundEffects.playError();
+      }
+    },
+    [scanResult, fetchStats]
+  );
+
+  useEffect(() => {
+    handleScanFeedbackRef.current = handleScanFeedback;
+  }, [handleScanFeedback]);
 
   // Authenticate Admin (Hashed check)
   const handleLogin = async (e: React.FormEvent) => {
@@ -138,7 +194,7 @@ export default function SecretGatekeeperScannerPage() {
         setWsConnected(false);
         setScanStatusText("SENSORS STANDBY (RECONNECTING...)");
         setTimeout(() => {
-          if (cameraActive) connectWebSocket();
+          if (cameraActive) connectWebSocketRef.current();
         }, 3000);
       };
 
@@ -149,7 +205,7 @@ export default function SecretGatekeeperScannerPage() {
       ws.onmessage = (event) => {
         try {
           const data: ScanResult = JSON.parse(event.data);
-          handleScanFeedback(data);
+          handleScanFeedbackRef.current(data);
         } catch {
           // ignore
         }
@@ -159,40 +215,9 @@ export default function SecretGatekeeperScannerPage() {
     }
   }, [cameraActive]);
 
-  // Handle Scan Verification Result
-  const handleScanFeedback = (result: ScanResult) => {
-    if (scanResult) return;
-
-    if (result.status === "searching") {
-      setScanStatusText("SCANNING FOR QR CIPHER...");
-      return;
-    }
-
-    if (result.status === "loading") {
-      setScanStatusText("AUTHENTICATING CITATION...");
-      return;
-    }
-
-    // Concrete result
-    setScanResult(result);
-
-    const historyItem: ScanHistoryItem = {
-      id: Math.random().toString(36).substring(7),
-      name: result.name || "Unknown Guest",
-      status: result.status === "success" ? "success" : "error",
-      message: result.message || (result.status === "success" ? "Entry allowed" : "Scan rejected"),
-      timestamp: new Date().toLocaleTimeString(),
-    };
-
-    setHistory((prev) => [historyItem, ...prev.slice(0, 19)]);
-    fetchStats();
-
-    if (result.status === "success") {
-      soundEffects.playSuccess();
-    } else {
-      soundEffects.playError();
-    }
-  };
+  useEffect(() => {
+    connectWebSocketRef.current = connectWebSocket;
+  }, [connectWebSocket]);
 
   // Start Camera
   const startCamera = async () => {
@@ -286,7 +311,7 @@ export default function SecretGatekeeperScannerPage() {
                   body: JSON.stringify({ token: raw }),
                 })
                   .then((res) => res.json())
-                  .then(handleScanFeedback);
+                  .then((data) => handleScanFeedbackRef.current(data));
               }
               return;
             }
@@ -508,6 +533,19 @@ export default function SecretGatekeeperScannerPage() {
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+          {stats.total_tickets !== undefined && (
+            <span
+              style={{
+                fontSize: "0.82rem",
+                color: "#ded5c0",
+                fontFamily: "system-ui, -apple-system, sans-serif",
+                fontWeight: 600,
+              }}
+            >
+              ADMITTED: {stats.admitted_guests || 0} / {stats.total_tickets}
+            </span>
+          )}
+
           <span
             style={{
               display: "flex",

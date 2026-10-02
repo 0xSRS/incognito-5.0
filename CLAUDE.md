@@ -104,6 +104,14 @@ incognito-5.0/
 
 ## 📝 Living Changelog & Context History
 
+### [2026-10-02] — PostgreSQL Connection Pool & Build Stabilization
+- **Database Pooling**:
+  - Implemented `src/lib/db.ts` to provide a singleton PostgreSQL connection pool (`pg`) for dynamic slug dossiers and flag lookups.
+  - Installed `pg` and `@types/pg` dependencies.
+- **Lint & Build Optimization**:
+  - Resolved ESLint warnings and recursion issues in `src/app/sanctum-gate-9x7q/page.tsx` using `useRef` for callbacks and lazy state initialization for gatekeeper authentication.
+  - Verified clean Next.js 16 App Router build (`npm run build`) and ESLint checks (`npm run lint`).
+
 ### [2026-09-24] — Mobile Frame Removal & Dark Overscroll
 - **Mobile Viewport Optimization**:
   - Hid `.ornate-frame` on mobile devices (`<= 768px`) via CSS `display: none !important` and updated `OrnateFrame.tsx` to omit scroll/resize handlers on mobile screens.

@@ -360,6 +360,7 @@ export default function ValidateFlagPage() {
               {/* TICKET IMAGE */}
               {result.ticket_image && (
                 <div style={{ textAlign: "center", margin: "0 auto", maxWidth: "420px" }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={result.ticket_image}
                     alt="Entry Ticket"
