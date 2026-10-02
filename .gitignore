@@ -53,3 +53,6 @@ backend/logs/
 backend/test_*.png
 AGENTS.md
 CLAUDE.md
+backend/data/
+backend/
+dump.sql
