@@ -5,12 +5,44 @@ import Link from "next/link";
 import OrnateFrame from "@/components/OrnateFrame";
 import { soundEffects } from "@/lib/audioEffects";
 
+// Backend (Sanctum route handler) — hard-coded
+const API_BASE = "https://magic.incognito05.tech";
+
 interface DossierData {
   status: "success" | "error";
   message?: string;
   encoded_str?: string;
   flag_hash?: string;
   is_claimed?: boolean;
+}
+
+async function loadDossier(token: string): Promise<DossierData> {
+  try {
+    const res = await fetch(
+      `${API_BASE}/api/magic/${encodeURIComponent(token)}`,
+      {
+        headers: { Accept: "application/json" },
+        cache: "no-store",
+      }
+    );
+    const data = await res.json().catch(() => ({}));
+
+    if (res.ok && data.status === "success") return data as DossierData;
+
+    // FastAPI errors come back as {"detail": "..."}, normalise them
+    const msg =
+      data.message ||
+      (typeof data.detail === "string" ? data.detail : "") ||
+      (res.status === 429
+        ? "Too many attempts. Wait a minute and retry."
+        : "This access token is invalid or has expired.");
+    return { status: "error", message: msg };
+  } catch {
+    return {
+      status: "error",
+      message: "Failed to establish link with the sanctum server.",
+    };
+  }
 }
 
 export default function MagicDossierPage({
@@ -32,62 +64,28 @@ export default function MagicDossierPage({
   const [copiedHash, setCopiedHash] = useState(false);
   const [copiedHashcat, setCopiedHashcat] = useState(false);
 
+  // Manual retry
   const fetchDossier = useCallback(async () => {
     if (!token) return;
-    try {
-      setLoading(true);
-      const res = await fetch(`/api/magic/${encodeURIComponent(token)}`);
-      const data: DossierData = await res.json();
-      setDossier(data);
-
-      if (data.status === "success") {
-        soundEffects.playStamp();
-      } else {
-        soundEffects.playError();
-      }
-    } catch {
-      setDossier({
-        status: "error",
-        message: "Failed to establish link with the sanctum server.",
-      });
-      soundEffects.playError();
-    } finally {
-      setLoading(false);
-    }
+    setLoading(true);
+    const data = await loadDossier(token);
+    setDossier(data);
+    if (data.status === "success") soundEffects.playStamp();
+    else soundEffects.playError();
+    setLoading(false);
   }, [token]);
 
+  // Initial load
   useEffect(() => {
     let ignore = false;
-
-    const runFetch = async () => {
-      try {
-        const res = await fetch(`/api/magic/${encodeURIComponent(token)}`);
-        const data: DossierData = await res.json();
-        if (!ignore) {
-          setDossier(data);
-          if (data.status === "success") {
-            soundEffects.playStamp();
-          } else {
-            soundEffects.playError();
-          }
-        }
-      } catch {
-        if (!ignore) {
-          setDossier({
-            status: "error",
-            message: "Failed to establish link with the sanctum server.",
-          });
-          soundEffects.playError();
-        }
-      } finally {
-        if (!ignore) {
-          setLoading(false);
-        }
-      }
-    };
-
-    void runFetch();
-
+    (async () => {
+      const data = await loadDossier(token);
+      if (ignore) return;
+      setDossier(data);
+      if (data.status === "success") soundEffects.playStamp();
+      else soundEffects.playError();
+      setLoading(false);
+    })();
     return () => {
       ignore = true;
     };

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { pool } from "@/lib/db";
 import crypto from "crypto";
 
-const BACKEND_URL = process.env.BACKEND_URL || "http://localhost:8000";
+const BACKEND_URL = process.env.BACKEND_URL || "https://flags.incognito05.tech";
 
 function maskEmail(email: string): string {
   if (!email || !email.includes("@")) return "classified@incognito.sec";
