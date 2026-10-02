@@ -262,7 +262,7 @@ export default function ValidateFlagPage() {
                     type="text"
                     value={flag}
                     onChange={(e) => setFlag(e.target.value)}
-                    placeholder="INCOGNITO{....}"
+                    placeholder="NAME{....}"
                     required
                     disabled={cooldown > 0 || loading}
                     style={{
