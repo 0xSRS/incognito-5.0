@@ -25,6 +25,7 @@ interface TicketData {
 
 export default function ValidateFlagPage() {
   const [flag, setFlag] = useState("");
+  const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<TicketData | null>(null);
 
@@ -64,7 +65,7 @@ export default function ValidateFlagPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!flag.trim()) return;
+    if (!flag.trim() || !email.trim()) return;
 
     if (cooldown > 0) {
       setResult({
@@ -84,6 +85,7 @@ export default function ValidateFlagPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           flag: flag.trim(),
+          email: email.trim().toLowerCase(),
         }),
       });
 
@@ -203,7 +205,7 @@ export default function ValidateFlagPage() {
                 margin: 0,
               }}
             >
-              Enter your flag below to verify and receive your event entry ticket.
+              Enter your registered email and flag below to verify and receive your event entry ticket.
             </p>
           </div>
 
@@ -245,6 +247,43 @@ export default function ValidateFlagPage() {
               <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                 <div>
                   <label
+                    htmlFor="emailInput"
+                    style={{
+                      display: "block",
+                      fontSize: "0.95rem",
+                      fontWeight: 600,
+                      color: "#ffffff",
+                      marginBottom: "8px",
+                      fontFamily: "system-ui, -apple-system, sans-serif",
+                    }}
+                  >
+                    Registered Email
+                  </label>
+                  <input
+                    id="emailInput"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="your.email@example.com"
+                    required
+                    disabled={cooldown > 0 || loading}
+                    style={{
+                      width: "100%",
+                      padding: "14px 16px",
+                      background: "rgba(5, 3, 2, 0.9)",
+                      border: "1px solid rgba(224, 181, 99, 0.5)",
+                      color: "#ffffff",
+                      fontFamily: "system-ui, -apple-system, sans-serif",
+                      fontSize: "1rem",
+                      borderRadius: "4px",
+                      outline: "none",
+                      boxSizing: "border-box",
+                    }}
+                  />
+                </div>
+
+                <div>
+                  <label
                     htmlFor="flagInput"
                     style={{
                       display: "block",
@@ -283,7 +322,7 @@ export default function ValidateFlagPage() {
                 <div>
                   <button
                     type="submit"
-                    disabled={loading || !flag.trim() || cooldown > 0}
+                    disabled={loading || !flag.trim() || !email.trim() || cooldown > 0}
                     className="btn-seal"
                     style={{
                       width: "100%",
